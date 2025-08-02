@@ -1,0 +1,295 @@
+/*
+    Estilos generales y variables CSS para pantallas verticales
+*/
+:root {
+    --background-color: #103c42; /* Default background color */
+    --primary-color: #316772; /* Color principal para botones, etc. */
+    --text-color: #FFFFFF; /* Color de texto general */
+    --header-color: #FFFFFF; /* Color para títulos */
+    --wheel-border-color: #1a51a8; /* Color del borde exterior de la ruleta */
+    --wheel-inner-border-color: #ffffff; /* Color del borde interior de la ruleta */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    max-height: 100vh;
+    background-color: var(--background-color);
+    overflow: hidden; 
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100vh;
+    padding: 20px;
+}
+
+#logo {
+    max-width: 100%;
+    height: 5vh; /* Ajustado para pantallas verticales */
+    margin-bottom: 2vh;
+    margin-top: 0;
+    display: block; 
+}
+
+h1 {
+    color: var(--header-color);
+    margin-bottom: 2vh;
+    font-size: 5vh; /* Ajustado para que el tamaño de la fuente se adapte */
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    word-break: break-word;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    padding-bottom: 60px;
+}
+
+/*
+    Ajustamos el wrapper y la ruleta para la orientación vertical.
+    El tamaño principal ahora se basa en el ancho de la pantalla (`vw`).
+*/
+.wheel-wrapper {
+    position: relative;
+    width: 80vw; /* La ruleta ocupará el 80% del ancho de la pantalla */
+    height: 80vw;
+}
+
+.background-wheel {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: #103c42; 
+    border: 10px solid #F1A946; 
+    box-sizing: border-box;
+    z-index: -1; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.background-wheel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+        transparent 44.5deg, #F1A946 44.5deg 45deg,
+        #F1A946 45deg 45.5deg, transparent 45.5deg 89.5deg,
+        transparent 89.5deg, #F1A946 89.5deg 90deg,
+        #F1A946 90deg 90.5deg, transparent 90.5deg 134.5deg,
+        transparent 134.5deg, #F1A946 134.5deg 135deg,
+        #F1A946 135deg 135.5deg, transparent 135.5deg 179.5deg,
+        transparent 179.5deg, #F1A946 179.5deg 180deg,
+        #F1A946 180deg 180.5deg, transparent 180.5deg 224.5deg,
+        transparent 224.5deg, #F1A946 224.5deg 225deg,
+        #F1A946 225deg 225.5deg, transparent 225.5deg 269.5deg,
+        transparent 269.5deg, #F1A946 269.5deg 270deg,
+        #F1A946 270deg 270.5deg, transparent 270.5deg 314.5deg,
+        transparent 314.5deg, #F1A946 314.5deg 315deg,
+        #F1A946 315deg 315.5deg, transparent 315.5deg 360deg
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+
+.wheel-container {
+    position: absolute;
+    width: 70%; 
+    height: 70%;
+    border-radius: 50%;
+    background: conic-gradient(
+        #1677FF 0deg 45deg,
+        #E55257  45deg 90deg,
+        #F1A946 90deg 135deg,
+        #1677FF 135deg 180deg,
+        #9AC873 180deg 225deg,
+        #E55257 225deg 270deg,
+        #1677FF 270deg 315deg,
+        #E55257 315deg 360deg
+    );
+    border: 10px solid #F1A946; 
+    box-sizing: border-box; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.wheel-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%; 
+    height: 20%;
+    border-radius: 50%;
+    background-color: white; 
+    border: 5px solid #1a51a8; 
+    box-sizing: border-box;
+    z-index: 2;
+    background-image: url('assets/logo-medio.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.pointer {
+    position: absolute;
+    top: 8.5vw; /* Posicionado usando el ancho de la pantalla */
+    left: 40%;
+    rotate: 180deg; /* Girado para apuntar hacia abajo */
+    transform: translateX(-50%);
+    z-index: 3;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-left: 4vw solid transparent; /* Ajustado con vw */
+    border-right: 4vw solid transparent;
+    border-bottom: 9vw solid #F1A946;
+}
+
+#rouletteWheel {
+    width: 100%;
+    height: 100%;
+}
+
+.prize-text {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform-origin: 0% 50%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.prize-text span {
+    color: #FFFFFF;
+    font-size: 2.5vw; /* Ajustado para pantallas verticales */
+    font-weight: bold;
+    padding-left: 8vw;
+    padding-right: 0px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.prize-text.prize-1 { transform: rotate(22.5deg); }
+.prize-text.prize-2 { transform: rotate(67.5deg); }
+.prize-text.prize-3 { transform: rotate(112.5deg); }
+.prize-text.prize-4 { transform: rotate(157.5deg); }
+.prize-text.prize-5 { transform: rotate(202.5deg); }
+.prize-text.prize-6 { transform: rotate(247.5deg); }
+.prize-text.prize-7 { transform: rotate(292.5deg); }
+.prize-text.prize-8 { transform: rotate(337.5deg); }
+
+.prize-text.prize-3 span,
+.prize-text.prize-4 span,
+.prize-text.prize-5 span,
+.prize-text.prize-6 span {
+    transform: rotate(180deg);
+    padding-left: 0; 
+    padding-right: 8vw; 
+    text-align: right; 
+}
+
+.prize-text.prize-7 span {
+    font-size: 2vw; 
+    text-align: center;
+}
+
+.prize-text.prize-5 span {
+    font-size: 2vw; 
+    text-align: center;
+}
+
+#bottom-logo {
+    max-width: 15vw; 
+    height: auto; 
+    margin-top: 20px; 
+    margin-left: auto; 
+    margin-right: 20px; 
+}
+
+.play-button-container {
+    margin-top: 0vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#playHereButton {
+    background-color: #FFFFFF;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    margin-top: 10px;
+    padding: 1.5vh 3vw; 
+    border-radius: 64px;
+    font-size: 2.5vw; 
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    max-width: 50vw; 
+    width: 80%;
+    box-sizing: border-box;
+}
+
+#playHereButton:hover {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+#playHereButton:active {
+    transform: translateY(0);
+}
+
+.spin {
+    animation: spin-animation 4s ease-out forwards;
+}
+
+@keyframes spin-animation {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(3600deg);
+    }
+}
