@@ -85,7 +85,7 @@ h1 {
     height: 80%;
     border-radius: 50%;
     background-color: #103c42; 
-    border: 10px solid #F1A946; 
+    border: calc(1vmin + 0.5vw) solid #466670; 
     box-sizing: border-box;
     z-index: -1; 
     top: 50%;
@@ -104,20 +104,20 @@ h1 {
     height: 100%;
     border-radius: 50%;
     background: conic-gradient(
-        transparent 44.5deg, #F1A946 44.5deg 45deg,
-        #F1A946 45deg 45.5deg, transparent 45.5deg 89.5deg,
-        transparent 89.5deg, #F1A946 89.5deg 90deg,
-        #F1A946 90deg 90.5deg, transparent 90.5deg 134.5deg,
-        transparent 134.5deg, #F1A946 134.5deg 135deg,
-        #F1A946 135deg 135.5deg, transparent 135.5deg 179.5deg,
-        transparent 179.5deg, #F1A946 179.5deg 180deg,
-        #F1A946 180deg 180.5deg, transparent 180.5deg 224.5deg,
-        transparent 224.5deg, #F1A946 224.5deg 225deg,
-        #F1A946 225deg 225.5deg, transparent 225.5deg 269.5deg,
-        transparent 269.5deg, #F1A946 269.5deg 270deg,
-        #F1A946 270deg 270.5deg, transparent 270.5deg 314.5deg,
-        transparent 314.5deg, #F1A946 314.5deg 315deg,
-        #F1A946 315deg 315.5deg, transparent 315.5deg 360deg
+        transparent 44.5deg, #466670 44.5deg 45deg,
+        #466670 45deg 45.5deg, transparent 45.5deg 89.5deg,
+        transparent 89.5deg, #466670 89.5deg 90deg,
+        #466670 90deg 90.5deg, transparent 90.5deg 134.5deg,
+        transparent 134.5deg, #466670 134.5deg 135deg,
+        #466670 135deg 135.5deg, transparent 135.5deg 179.5deg,
+        transparent 179.5deg, #466670 179.5deg 180deg,
+        #466670 180deg 180.5deg, transparent 180.5deg 224.5deg,
+        transparent 224.5deg, #466670 224.5deg 225deg,
+        #466670 225deg 225.5deg, transparent 225.5deg 269.5deg,
+        transparent 269.5deg, #466670 269.5deg 270deg,
+        #466670 270deg 270.5deg, transparent 270.5deg 314.5deg,
+        transparent 314.5deg, #466670 314.5deg 315deg,
+        #466670 315deg 315.5deg, transparent 315.5deg 360deg
     );
     z-index: -1;
     pointer-events: none;
@@ -129,16 +129,16 @@ h1 {
     height: 70%;
     border-radius: 50%;
     background: conic-gradient(
-        #1677FF 0deg 45deg,
-        #E55257  45deg 90deg,
+        #85c4b3 0deg 45deg,
+        #c85257  45deg 90deg,
         #F1A946 90deg 135deg,
-        #1677FF 135deg 180deg,
-        #9AC873 180deg 225deg,
-        #E55257 225deg 270deg,
-        #1677FF 270deg 315deg,
-        #E55257 315deg 360deg
+        #85c4b3 135deg 180deg,
+        #acd878 180deg 225deg,
+        #c85257 225deg 270deg,
+        #85c4b3 270deg 315deg,
+        #c85257 315deg 360deg
     );
-    border: 10px solid #F1A946; 
+    border: calc(1vmin + 0.5vw) solid #466670; 
     box-sizing: border-box; 
     top: 50%;
     left: 50%;
@@ -157,7 +157,7 @@ h1 {
     height: 20%;
     border-radius: 50%;
     background-color: white; 
-    border: 5px solid #1a51a8; 
+    border: 5px solid #466670; 
     box-sizing: border-box;
     z-index: 2;
     background-image: url('assets/logo-medio.png');
@@ -168,7 +168,7 @@ h1 {
 
 .pointer {
     position: absolute;
-    top: 8.5vw; /* Posicionado usando el ancho de la pantalla */
+    top: 8.2vw; /* Posicionado usando el ancho de la pantalla */
     left: 40%;
     rotate: 180deg; /* Girado para apuntar hacia abajo */
     transform: translateX(-50%);
@@ -179,6 +179,7 @@ h1 {
     border-left: 4vw solid transparent; /* Ajustado con vw */
     border-right: 4vw solid transparent;
     border-bottom: 9vw solid #F1A946;
+    filter: drop-shadow(2px 0px 3px rgba(0, 0, 0, 0.3));
 }
 
 #rouletteWheel {
@@ -240,9 +241,9 @@ h1 {
 }
 
 #bottom-logo {
-    max-width: 15vw; 
+    max-width: 35vw; 
     height: auto; 
-    margin-top: 20px; 
+    margin-top: 5px; 
     margin-left: auto; 
     margin-right: 20px; 
 }
