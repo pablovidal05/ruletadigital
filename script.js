@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     localStorage.setItem('oticCount', oticCount);
                 }
 
-                if (oticCount >= 21 && !replacedSegments.includes(segmentIndex)) {
+                if (oticCount >= 22 && !replacedSegments.includes(segmentIndex)) {
                     // Cambiar texto y estilo
                     prizeElements[segmentIndex].innerText = "SIGA PARTICIPANDO";
                     prizeElements[segmentIndex].style.fontSize = "2vw";
