@@ -4,7 +4,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let isSpinning = false;
     let currentRotation = 0;
-    let oticCount = 0;
+    let oticCount = parseInt(localStorage.getItem('oticCount')) || 0;
+    const replacedSegments = JSON.parse(localStorage.getItem('replacedSegments')) || [];
+
+    // Restaurar textos si ya fueron cambiados antes
+    const prizeElements = document.querySelectorAll('.prize-text span');
+    replacedSegments.forEach(index => {
+        if (prizeElements[index]) {
+            prizeElements[index].innerText = "SIGA PARTICIPANDO";
+            prizeElements[index].style.fontSize = "2vw";
+            prizeElements[index].style.textAlign = "center";
+        }
+    });
 
     playButton.addEventListener('click', function () {
         if (!isSpinning) {
@@ -13,13 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const numberOfPrizes = 8;
             const segmentAngle = 360 / numberOfPrizes;
-
             const randomPrizeIndex = Math.floor(Math.random() * numberOfPrizes);
-            const prizeAngle = (randomPrizeIndex * segmentAngle) + (segmentAngle / 2);
-            const additionalRotation = 1300 + (360 - prizeAngle);
-            currentRotation += additionalRotation;
+            const centerAngle = (randomPrizeIndex * segmentAngle) + (segmentAngle / 2);
+            const pointerDirection = 270;
+            const normalizedRotation = currentRotation % 360;
+            const neededNormalized = (pointerDirection - centerAngle + 360) % 360;
+            const delta = (neededNormalized - normalizedRotation + 360) % 360;
+            const spins = 6;
+            currentRotation += (spins * 360) + delta;
 
-            // Reset transition
+            // Iniciar animación
             rouletteWheel.style.transition = 'none';
             setTimeout(() => {
                 rouletteWheel.style.transition = 'transform 4s ease-out';
@@ -30,32 +44,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 isSpinning = false;
                 playButton.disabled = false;
 
-                const normalizedRotation = currentRotation % 360;
-                const pointerAngle = 360 - normalizedRotation;
+                const finalNormalized = currentRotation % 360;
+                const angleAtPointer = (pointerDirection - finalNormalized + 360) % 360;
+                const segmentIndex = Math.floor(angleAtPointer / segmentAngle);
 
-                // Ajuste por puntero apuntando a 180°
-                let correctedAngle = (pointerAngle + 22.5 - 180 + 360) % 360;
-
-                const segmentIndex = Math.floor(correctedAngle / 45);
-
-                const prizeElements = document.querySelectorAll('.prize-text span');
-                const selectedPrizeText = prizeElements[segmentIndex].innerText.replace(/\s+/g, ' ').trim().toUpperCase();
+                const selectedPrizeText = prizeElements[segmentIndex].innerText
+                    .replace(/\s+/g, ' ')
+                    .trim()
+                    .toUpperCase();
 
                 console.log("Premio visible:", selectedPrizeText);
 
-                if (selectedPrizeText.includes("PREMIO OTIC")) {
+                if (selectedPrizeText === "PREMIO OTIC") {
                     oticCount++;
-                    console.log("OTIC ha salido:", oticCount, "veces");
+                    localStorage.setItem('oticCount', oticCount);
+                }
 
-                    if (oticCount >= 21) {
-                        const oticElement = document.querySelector('.prize-text.prize-1 span');
-                        if (oticElement) {
-                            oticElement.textContent = "SIGA\nPARTICIPANDO";
-                            oticElement.style.fontSize = "2vw";
-                            oticElement.style.textAlign = "center";
-                            console.log("PREMIO OTIC cambiado a SIGA PARTICIPANDO");
-                        }
-                    }
+                if (oticCount >= 21 && !replacedSegments.includes(segmentIndex)) {
+                    // Cambiar texto y estilo
+                    prizeElements[segmentIndex].innerText = "SIGA PARTICIPANDO";
+                    prizeElements[segmentIndex].style.fontSize = "2vw";
+                    prizeElements[segmentIndex].style.textAlign = "center";
+
+                    // Guardar segmento reemplazado
+                    replacedSegments.push(segmentIndex);
+                    localStorage.setItem('replacedSegments', JSON.stringify(replacedSegments));
+                }
+
+            }, { once: true });
+        }
+    });
+});
+
                 }
             }, { once: true }); // esto asegura que no se acumulen múltiples listeners
         }
