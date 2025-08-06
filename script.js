@@ -75,9 +75,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-                }
-            }, { once: true }); // esto asegura que no se acumulen múltiples listeners
-        }
-    });
-});
